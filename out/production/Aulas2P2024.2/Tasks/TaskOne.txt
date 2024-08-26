@@ -1,0 +1,6 @@
+1 - Criar um modulo de calculadora, onde a mesma some, subtraia, divida e multiple valores.
+1 - Criar um objeto com 5 atributos e minimo de 5 funções que faça sentido.
+
+Commits até 26/08 as 23:59
+
+--------------------------------------------------------------------------------------
