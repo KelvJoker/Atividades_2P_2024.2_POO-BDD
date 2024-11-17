@@ -14,41 +14,43 @@ public class ifood {
 
         try {
             while (true) {
-                System.out.println("\n--- MENU ---");
+                System.out.println("\n======== Menu Inicial ========");
                 System.out.println("1. Listar Restaurantes");
                 System.out.println("2. Exibir Carrinho");
                 System.out.println("3. Sair");
-                System.out.print("Escolha uma opção: ");
-
+                System.out.println("==============================");
+                System.out.print("Escolha a opção: ");
                 int opcao = scanner.nextInt();
                 scanner.nextLine();
 
                 if (opcao == 1) {
-                    System.out.println("\n--- Restaurantes ---");
+                    System.out.println("\n======== Restaurantes Disponiveis ========");
                     for (int i = 0; i < restaurantes.size(); i++) {
                         System.out.println((i + 1) + ". " + restaurantes.get(i));
                     }
-                    System.out.print("Selecione um restaurante: ");
+                    System.out.println("==============================");
+                    System.out.print("Selecione o restaurante: ");
                     int restauranteIndex = scanner.nextInt() - 1;
                     scanner.nextLine();
 
                     if (restauranteIndex < 0 || restauranteIndex >= restaurantes.size()) {
-                        System.out.println("Restaurante inválido.");
+                        System.out.println("Esse restaurante segue o caminho da inexistência.");
                         continue;
                     }
 
                     Restaurante restauranteSelecionado = restaurantes.get(restauranteIndex);
 
-                    System.out.println("\n--- Produtos de " + restauranteSelecionado + " ---");
+                    System.out.println("\n======== Produtos de " + restauranteSelecionado + " ========");
                     for (int i = 0; i < restauranteSelecionado.produtos.size(); i++) {
                         System.out.println((i + 1) + ". " + restauranteSelecionado.produtos.get(i));
                     }
+                    System.out.println("==============================");
                     System.out.print("Selecione um produto: ");
                     int produtoIndex = scanner.nextInt() - 1;
                     scanner.nextLine();
 
                     if (produtoIndex < 0 || produtoIndex >= restauranteSelecionado.produtos.size()) {
-                        System.out.println("Produto inválido.");
+                        System.out.println("Produto não existe.");
                         continue;
                     }
 
@@ -56,11 +58,12 @@ public class ifood {
                     carrinho.adicionarProduto(produtoSelecionado);
 
                     if (!produtoSelecionado.adicionais.isEmpty()) {
-                        System.out.println("\n--- Adicionais para " + produtoSelecionado + " ---");
+                        System.out.println("\n======== Adicionais para " + produtoSelecionado + " ========");
                         for (int i = 0; i < produtoSelecionado.adicionais.size(); i++) {
                             System.out.println((i + 1) + ". " + produtoSelecionado.adicionais.get(i));
                         }
-                        System.out.print("Selecione um adicional (ou 0 para pular): ");
+                        System.out.println("==============================");
+                        System.out.print("Selecione um adicional (ou 0 caso não queira): ");
                         int adicionalIndex = scanner.nextInt() - 1;
                         scanner.nextLine();
 
@@ -70,19 +73,19 @@ public class ifood {
                         }
                     }
 
-                    System.out.println("Produto adicionado ao carrinho!");
+                    System.out.println("O produto foi adicionado no carrinho.");
 
                 } else if (opcao == 2) {
                     carrinho.exibirCarrinho();
                 } else if (opcao == 3) {
-                    System.out.println("Saindo...");
+                    System.out.println("Finalizando...");
                     break;
                 } else {
-                    System.out.println("Opção inválida.");
+                    System.out.println("Opção não existe.");
                 }
             }
         } catch (InputMismatchException e) {
-            System.out.println("Entrada inválida, por favor insira um número.");
+            System.out.println("Por favor insira um número.");
             scanner.next();
         } finally {
             scanner.close();
