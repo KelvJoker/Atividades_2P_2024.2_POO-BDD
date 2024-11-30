@@ -31,7 +31,6 @@ public class categoriaDAO {
                 cat.setNome(rs.getString("nome"));
                 cat.setTipo(rs.getString("tipo"));
                 cat.setDescricao(rs.getString("descricao"));
-
                 listaCategorias.add(cat);
             }
         } catch (SQLException ex) {
@@ -39,7 +38,6 @@ public class categoriaDAO {
         } finally {
             BDD.closeConnection(con, stmt, rs);
         }
-
         return listaCategorias;
     }
 }

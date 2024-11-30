@@ -13,7 +13,6 @@ import java.util.logging.Logger;
 
 public class historico_pagamentoDAO {
 
-    // Método para listar registros do histórico de pagamento
     public List<historico_pagamento> listarHistoricoPagamento() {
         Connection con = BDD.getConnection();
         PreparedStatement stmt = null;
@@ -22,11 +21,10 @@ public class historico_pagamentoDAO {
         List<historico_pagamento> listahistorico_pagamento = new ArrayList<>();
 
         try {
-            // Consulta SQL para buscar todos os registros do histórico de pagamento
+
             stmt = con.prepareStatement("SELECT * FROM historico_pagamento");
             rs = stmt.executeQuery();
 
-            // Itera pelos resultados e mapeia para objetos historico_pagamento
             while (rs.next()) {
                 historico_pagamento histPag = new historico_pagamento();
                 histPag.setId(rs.getInt("id"));
@@ -40,7 +38,6 @@ public class historico_pagamentoDAO {
         } catch (SQLException ex) {
             Logger.getLogger(historico_pagamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            // Fecha a conexão e outros recursos
             BDD.closeConnection(con, stmt, rs);
         }
 

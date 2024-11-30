@@ -41,7 +41,6 @@ public class restauranteDAO {
         } finally {
             BDD.closeConnection(con, stmt, rs);
         }
-
         return listaRestaurantes;
     }
 }

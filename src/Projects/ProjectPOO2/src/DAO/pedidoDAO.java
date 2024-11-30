@@ -13,7 +13,6 @@ import java.util.logging.Logger;
 
 public class pedidoDAO {
 
-    // Método para listar registros de pedidos
     public List<pedido> listarPedidos() {
         Connection con = BDD.getConnection();
         PreparedStatement stmt = null;
@@ -22,11 +21,9 @@ public class pedidoDAO {
         List<pedido> listaPedidos = new ArrayList<>();
 
         try {
-            // Consulta SQL para buscar todos os registros de pedidos
             stmt = con.prepareStatement("SELECT * FROM pedido");
             rs = stmt.executeQuery();
 
-            // Itera pelos resultados e mapeia para objetos pedido
             while (rs.next()) {
                 pedido ped = new pedido();
                 ped.setId(rs.getInt("id"));
@@ -46,10 +43,8 @@ public class pedidoDAO {
         } catch (SQLException ex) {
             Logger.getLogger(pedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            // Fecha a conexão e outros recursos
             BDD.closeConnection(con, stmt, rs);
         }
-
         return listaPedidos;
     }
 }

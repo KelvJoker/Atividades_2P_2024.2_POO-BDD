@@ -13,7 +13,6 @@ import java.util.logging.Logger;
 
 public class promocaoDAO {
 
-    // Método para listar registros de promoção
     public List<promocao> listarPromocoes() {
         Connection con = BDD.getConnection();
         PreparedStatement stmt = null;
@@ -22,11 +21,9 @@ public class promocaoDAO {
         List<promocao> listaPromocoes = new ArrayList<>();
 
         try {
-            // Consulta SQL para buscar todos os registros da tabela promoção
             stmt = con.prepareStatement("SELECT * FROM promocao");
             rs = stmt.executeQuery();
 
-            // Itera pelos resultados e mapeia para objetos promocao
             while (rs.next()) {
                 promocao promo = new promocao();
                 promo.setId(rs.getInt("id"));
@@ -41,10 +38,8 @@ public class promocaoDAO {
         } catch (SQLException ex) {
             Logger.getLogger(promocaoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            // Fecha a conexão e outros recursos
             BDD.closeConnection(con, stmt, rs);
         }
-
         return listaPromocoes;
     }
 }

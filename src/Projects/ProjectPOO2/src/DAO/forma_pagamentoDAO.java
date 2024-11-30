@@ -40,7 +40,6 @@ public class forma_pagamentoDAO {
                 ex.printStackTrace();
             }
         }
-
         return listaFormaPagamento;
     }
 }

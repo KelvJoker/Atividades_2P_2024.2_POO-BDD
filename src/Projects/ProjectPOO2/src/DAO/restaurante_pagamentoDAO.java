@@ -36,7 +36,6 @@ public class restaurante_pagamentoDAO {
         } finally {
             BDD.closeConnection(con, stmt, rs);
         }
-
         return listaRestaurantePagamento;
     }
 }

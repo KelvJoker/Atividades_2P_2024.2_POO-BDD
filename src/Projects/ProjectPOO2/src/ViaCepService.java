@@ -22,15 +22,13 @@ public class ViaCepService {
             if (response.statusCode() == 200) {
                 String responseBody = response.body();
 
-                // Converter JSON para objeto
                 Gson gson = new Gson();
                 ViaCepResponse viaCepResponse = gson.fromJson(responseBody, ViaCepResponse.class);
 
                 if (viaCepResponse.getErro() != null && viaCepResponse.getErro()) {
-                    return null; // Retorna nulo se o CEP não for encontrado
+                    return null;
                 }
 
-                // Criar objeto 'endereco' com os dados do ViaCEP
                 endereco endereco = new endereco();
                 endereco.setRua(viaCepResponse.getLogradouro());
                 endereco.setBairro(viaCepResponse.getBairro());
@@ -44,7 +42,6 @@ public class ViaCepService {
         return null;
     }
 
-    // Classe interna para mapeamento do JSON do ViaCEP
     private static class ViaCepResponse {
         private String logradouro;
         private String bairro;

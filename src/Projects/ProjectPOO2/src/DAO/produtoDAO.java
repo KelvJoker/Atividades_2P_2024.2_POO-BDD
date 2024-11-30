@@ -2,7 +2,6 @@ package DAO;
 
 import Bean.produto;
 import Conexão.BDD;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -39,7 +38,6 @@ public class produtoDAO {
         } finally {
             BDD.closeConnection(con, stmt, rs);
         }
-
         return produtos;
     }
 
@@ -47,7 +45,6 @@ public class produtoDAO {
         Connection con = BDD.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-
         produto prod = null;
 
         try {
@@ -69,7 +66,6 @@ public class produtoDAO {
         } finally {
             BDD.closeConnection(con, stmt, rs);
         }
-
         return prod;
     }
 }
