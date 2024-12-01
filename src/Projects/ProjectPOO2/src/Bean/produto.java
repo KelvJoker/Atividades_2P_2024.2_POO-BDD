@@ -1,8 +1,9 @@
 package Bean;
 
 public class produto {
-    private int id, preco, categoria_id, restaurante_id;
+    private int id, categoria_id, restaurante_id;
     private String nome, descricao;
+    private double preco;
 
     public int getId() {
         return id;
@@ -12,7 +13,7 @@ public class produto {
         this.id = id;
     }
 
-    public int getPreco() {
+    public double getPreco() {
         return preco;
     }
 
