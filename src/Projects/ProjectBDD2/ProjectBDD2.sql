@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `categoria` (
   `nome` varchar(255) NOT NULL,
   `descricao` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela projetoif.categoria: ~10 rows (aproximadamente)
 INSERT INTO `categoria` (`id`, `tipo`, `nome`, `descricao`) VALUES
@@ -75,13 +75,13 @@ CREATE TABLE IF NOT EXISTS `endereco` (
   `bairro` varchar(100) DEFAULT NULL,
   `cidade` varchar(100) DEFAULT NULL,
   `estado` varchar(50) DEFAULT NULL,
-  `numero` varchar(10) DEFAULT NULL,
+  `numero` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `complemento` varchar(100) DEFAULT NULL,
   `ponto_referencia` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela projetoif.endereco: ~10 rows (aproximadamente)
+-- Copiando dados para a tabela projetoif.endereco: ~29 rows (aproximadamente)
 INSERT INTO `endereco` (`id`, `rua`, `bairro`, `cidade`, `estado`, `numero`, `complemento`, `ponto_referencia`) VALUES
 	(1, 'Rua das Flores', 'Centro', 'São Paulo', 'SP', '100', 'Apto 12', 'Próximo ao mercado'),
 	(2, 'Av. Paulista', 'Bela Vista', 'São Paulo', 'SP', '1500', 'Sala 302', 'Ao lado do banco'),
@@ -92,7 +92,31 @@ INSERT INTO `endereco` (`id`, `rua`, `bairro`, `cidade`, `estado`, `numero`, `co
 	(7, 'Rua do Sol', 'Boa Vista', 'Fortaleza', 'CE', '300', NULL, 'Esquina com a padaria'),
 	(8, 'Av. Getúlio Vargas', 'Centro', 'Porto Alegre', 'RS', '100', 'Loja 10', NULL),
 	(9, 'Rua das Palmeiras', 'Jardins', 'Salvador', 'BA', '120', NULL, 'Próximo ao parque'),
-	(10, 'Av. Brasil', 'Centro', 'Brasília', 'DF', '999', NULL, NULL);
+	(10, 'Av. Brasil', 'Centro', 'Brasília', 'DF', '999', NULL, NULL),
+	(11, '', '', 'Sertânia', 'PE', '87981553826', NULL, NULL),
+	(12, '', '', 'Sertânia', 'PE', '87981553826', NULL, NULL),
+	(13, '', '', 'Sertânia', 'PE', '981553826', NULL, NULL),
+	(14, 'sasss', 'dsasdsa', 'sdaaaa', 'sss', '87981554832', NULL, NULL),
+	(15, '', '', 'Sertânia', 'PE', '981553826', NULL, NULL),
+	(16, '', '', 'Sertânia', 'PE', '8721368765', NULL, NULL),
+	(17, '2', '2', '2', '2', '222222', NULL, NULL),
+	(18, '', '', 'Sertânia', 'PE', '3', NULL, NULL),
+	(19, '', '', 'Sertânia', 'PE', '87981553826', NULL, NULL),
+	(20, 'Rua José Valério dos Santos', 'Rio da Barra', 'Sertânia', 'PE', '981553826', NULL, NULL),
+	(21, 'Rua José Valério dos Santos', 'Rio da Barra', 'Sertânia', 'PE', '87981579587', NULL, NULL),
+	(22, '', '', 'Sertânia', 'PE', '2342', NULL, NULL),
+	(23, 'Rua José Valério dos Santos', 'Rio da Barra', 'Sertânia', 'PE', '107', NULL, NULL),
+	(24, 'Rua José Valério dos Santos', 'Rio da Barra', 'Sertânia', 'PE', '107', NULL, NULL),
+	(25, '', '', 'Sertânia', 'PE', '123', NULL, NULL),
+	(26, '', '', 'Sertânia', 'PE', '1243', NULL, NULL),
+	(27, '', '', 'Sertânia', 'PE', '345', NULL, NULL),
+	(28, '', '', 'Sertânia', 'PE', '34', NULL, NULL),
+	(29, 'Rua José Valério dos Santos', 'Rio da Barra', 'Sertânia', 'PE', '87981553826', NULL, NULL),
+	(30, '', '', 'Sertânia', 'PE', '107', NULL, NULL),
+	(31, '', '', 'Sertânia', 'PE', '107', NULL, NULL),
+	(32, '', '', 'Sertânia', 'PE', '107', NULL, NULL),
+	(33, '', '', 'Sertânia', 'PE', '651', NULL, NULL),
+	(34, 'asd', 'asd', 'asd', 'asd', '123', NULL, NULL);
 
 -- Copiando estrutura para tabela projetoif.forma_pagamento
 CREATE TABLE IF NOT EXISTS `forma_pagamento` (
@@ -229,7 +253,7 @@ CREATE TABLE IF NOT EXISTS `produto` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
   `descricao` text,
-  `preco` decimal(10,2) NOT NULL,
+  `preco` double NOT NULL DEFAULT (0),
   `categoria_id` int DEFAULT NULL,
   `restaurante_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -237,20 +261,30 @@ CREATE TABLE IF NOT EXISTS `produto` (
   KEY `restaurante_id` (`restaurante_id`),
   CONSTRAINT `produto_ibfk_1` FOREIGN KEY (`categoria_id`) REFERENCES `categoria` (`id`),
   CONSTRAINT `produto_ibfk_2` FOREIGN KEY (`restaurante_id`) REFERENCES `restaurante` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela projetoif.produto: ~10 rows (aproximadamente)
+-- Copiando dados para a tabela projetoif.produto: ~20 rows (aproximadamente)
 INSERT INTO `produto` (`id`, `nome`, `descricao`, `preco`, `categoria_id`, `restaurante_id`) VALUES
-	(1, 'Pizza Margherita', 'Queijo, tomate e manjericão', 39.90, 1, 1),
-	(2, 'Pizza Calabresa', 'Calabresa, cebola e queijo', 42.90, 1, 10),
-	(3, 'Hambúrguer Clássico', 'Carne, queijo, salada e molho especial', 29.90, 2, 2),
-	(4, 'Combo Família', 'Pizza grande + refrigerante', 59.90, 1, 1),
-	(5, 'Sorvete de Chocolate', 'Chocolate artesanal', 12.90, 3, 3),
-	(6, 'Suco Detox', 'Suco natural com frutas verdes', 10.90, 4, 4),
-	(7, 'Refrigerante 2L', 'Coca-Cola, Fanta ou Guaraná', 8.90, 5, 4),
-	(8, 'Espetinho de Carne', 'Carne assada no espeto', 15.90, 6, 5),
-	(9, 'Brownie', 'Doce de chocolate com castanhas', 8.50, 7, 6),
-	(10, 'Café Expresso', 'Café puro e forte', 6.90, 9, 9);
+	(1, 'Pizza Margherita', 'Queijo, tomate e manjericão', 39.900001525878906, 1, 1),
+	(2, 'Pizza Calabresa', 'Calabresa, cebola e queijo', 42.900001525878906, 1, 10),
+	(3, 'Hambúrguer Clássico', 'Carne, queijo, salada e molho especial', 29.899999618530273, 2, 2),
+	(4, 'Combo Família', 'Pizza grande + refrigerante', 59.900001525878906, 1, 1),
+	(5, 'Sorvete de Chocolate', 'Chocolate artesanal', 12.899999618530273, 3, 3),
+	(6, 'Suco Detox', 'Suco natural com frutas verdes', 10.899999618530273, 4, 4),
+	(7, 'Refrigerante 2L', 'Coca-Cola, Fanta ou Guaraná', 8.899999618530273, 5, 4),
+	(8, 'Espetinho de Carne', 'Carne assada no espeto', 15.899999618530273, 6, 5),
+	(9, 'Brownie', 'Doce de chocolate com castanhas', 8.5, 7, 6),
+	(10, 'Café Expresso', 'Café puro e forte', 6.900000095367432, 9, 9),
+	(11, 'Ramen', 'Uma sopa com caldo a base de osso de porco', 14, 10, 8),
+	(12, 'Lasanha vegana', 'Lasanha deliçiosa vegana', 22, 8, 7),
+	(13, 'Hambúrguer Gourmet', 'Carne dupla,queijo,salada, molho especial, alface e cebola', 38, 2, 2),
+	(14, 'Açaí ', 'Sorvete de açaí recheios a escolha', 11, 3, 3),
+	(15, 'Espetinho de Carne suína', 'Linguiças otimas no espeto', 20, 6, 5),
+	(16, 'Bolo red velvet', 'Bolo avemelhado lindo e gostoso', 87, 7, 6),
+	(17, 'Strogonoff de cogumelos', 'Prato cremoso, feito com cogumelos ', 22, 8, 7),
+	(18, 'Sashimi', 'Iguaria de peixes e frutos do mar', 18, 10, 8),
+	(19, 'Café Especial ', 'Café isento de impurezas ', 9, 9, 9),
+	(20, 'Pizza itáliana', 'Mozzarella de leite de vaca, cabra ou búfala, manjericão e azeite', 34, 1, 10);
 
 -- Copiando estrutura para tabela projetoif.promocao
 CREATE TABLE IF NOT EXISTS `promocao` (
