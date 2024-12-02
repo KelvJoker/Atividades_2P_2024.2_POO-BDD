@@ -15,8 +15,8 @@ public class Main {
         List<pedido_produto> carrinho = new ArrayList<>();
         List<String> pedidosRealizados = new ArrayList<>();
 
-        while (true) {  // Loop para permitir múltiplos pedidos
-            carrinho.clear(); // Limpa o carrinho para um novo pedido
+        while (true) {  
+            carrinho.clear();
             endereco enderecoEntrega = null;
             forma_pagamento formaPagamento = null;
 
@@ -36,7 +36,7 @@ public class Main {
                 break;
             }
 
-            if (escolhaMenu == 0) { // Fazer Pedido
+            if (escolhaMenu == 0) {
                 // 1. Listar Restaurantes
                 List<restaurante> restaurantes = resDAO.listarRestaurantes();
                 if (restaurantes.isEmpty()) {
@@ -92,19 +92,19 @@ public class Main {
 
                 // 3. Mostrar o Carrinho com Total
                 StringBuilder resumoCarrinho = new StringBuilder("Carrinho:\n");
-                double totalCarrinho = 0.0; // Inicializa o total
+                double totalCarrinho = 0.0;
 
                 for (pedido_produto pp : carrinho) {
                     produto p = prodDAO.buscarProdutoPorId(pp.getId_produto());
-                    double subtotal = p.getPreco() * pp.getQuantidade(); // Calcula o subtotal do produto
-                    totalCarrinho += subtotal; // Adiciona ao total geral
+                    double subtotal = p.getPreco() * pp.getQuantidade();
+                    totalCarrinho += subtotal;
 
                     resumoCarrinho.append(String.format(
                             "%s - Quantidade: %d - Preço Unitário: R$ %.2f - Subtotal: R$ %.2f\n",
-                            p.getNome(),             // String -> %s
-                            pp.getQuantidade(),      // int    -> %d
-                            p.getPreco(),            // double -> %.2f
-                            subtotal                 // double -> %.2f
+                            p.getNome(),
+                            pp.getQuantidade(),
+                            p.getPreco(),
+                            subtotal
                     ));
                 }
 
@@ -127,7 +127,7 @@ public class Main {
                 String numeroStr = JOptionPane.showInputDialog("Número:");
                 if (numeroStr == null || numeroStr.trim().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Número inválido. Por favor, insira um número válido.");
-                    continue; // Retorna ao início do loop ou permite outra tentativa.
+                    continue;
                 }
 
                 long numero = Long.parseLong(numeroStr.trim());
@@ -147,7 +147,6 @@ public class Main {
                         .orElse(null);
 
                 // 6. Finalizar Pedido
-                // 6. Finalizar Pedido
                 String enderecoResumo = String.format(
                         "\nEndereço de Entrega:\n\nRua: %s\nBairro: %s\nCidade: %s\nEstado: %s\nNúmero: %s",
                         enderecoEntrega.getRua(),
@@ -158,13 +157,18 @@ public class Main {
                 );
 
                 String pedidoResumo = String.format(
-                        "Pedido do Restaurante: %s\n%s\n%s", // Inclui o resumo do endereço
+                        "Pedido do Restaurante: %s\n%s\n%s",
                         restauranteSelecionado.getNome(),
                         resumoCarrinho.toString(),
                         enderecoResumo
                 );
 
                 pedidosRealizados.add(pedidoResumo);
+
+                // Inicia a thread para atualizar o status do pedido
+                Thread statusThread = new Thread(new PedidoStatus(pedidoResumo, pedidosRealizados));
+                statusThread.start();
+
                 JOptionPane.showMessageDialog(null, "Pedido Finalizado!\n" + enderecoResumo);
 
             // Visualizar Pedidos
@@ -175,13 +179,12 @@ public class Main {
                 }
 
                 JTextArea textArea = new JTextArea(resumoPedidos.toString());
-                textArea.setEditable(false);  // Torna o texto apenas para leitura
-                textArea.setLineWrap(true);   // Quebra de linha automática
+                textArea.setEditable(false);
+                textArea.setLineWrap(true);
                 textArea.setWrapStyleWord(true);
 
                 JScrollPane scrollPane = new JScrollPane(textArea);
-                scrollPane.setPreferredSize(new Dimension(600, 400));  // Define o tamanho da área de exibição
-
+                scrollPane.setPreferredSize(new Dimension(600, 400));
                 JOptionPane.showMessageDialog(null, scrollPane, "Pedidos Realizados", JOptionPane.INFORMATION_MESSAGE);
             }
         }
