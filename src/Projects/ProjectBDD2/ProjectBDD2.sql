@@ -79,9 +79,9 @@ CREATE TABLE IF NOT EXISTS `endereco` (
   `complemento` varchar(100) DEFAULT NULL,
   `ponto_referencia` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela projetoif.endereco: ~29 rows (aproximadamente)
+-- Copiando dados para a tabela projetoif.endereco: ~32 rows (aproximadamente)
 INSERT INTO `endereco` (`id`, `rua`, `bairro`, `cidade`, `estado`, `numero`, `complemento`, `ponto_referencia`) VALUES
 	(1, 'Rua das Flores', 'Centro', 'São Paulo', 'SP', '100', 'Apto 12', 'Próximo ao mercado'),
 	(2, 'Av. Paulista', 'Bela Vista', 'São Paulo', 'SP', '1500', 'Sala 302', 'Ao lado do banco'),
@@ -116,7 +116,10 @@ INSERT INTO `endereco` (`id`, `rua`, `bairro`, `cidade`, `estado`, `numero`, `co
 	(31, '', '', 'Sertânia', 'PE', '107', NULL, NULL),
 	(32, '', '', 'Sertânia', 'PE', '107', NULL, NULL),
 	(33, '', '', 'Sertânia', 'PE', '651', NULL, NULL),
-	(34, 'asd', 'asd', 'asd', 'asd', '123', NULL, NULL);
+	(34, 'asd', 'asd', 'asd', 'asd', '123', NULL, NULL),
+	(35, 'wdasdaw', 'wdasdsa', 'wasd', 'wasd', '1233', NULL, NULL),
+	(36, 'Rua José Valério dos Santos', 'Rio da Barra', 'Sertânia', 'PE', '2020', NULL, NULL),
+	(37, 'Avenida José Bonifácio', 'São Cristóvão', 'Arcoverde', 'PE', '10', NULL, NULL);
 
 -- Copiando estrutura para tabela projetoif.forma_pagamento
 CREATE TABLE IF NOT EXISTS `forma_pagamento` (
@@ -206,9 +209,9 @@ CREATE TABLE IF NOT EXISTS `pedido` (
   CONSTRAINT `pedido_ibfk_3` FOREIGN KEY (`id_status_entrega`) REFERENCES `status_entrega` (`id`),
   CONSTRAINT `pedido_ibfk_4` FOREIGN KEY (`id_forma_pagamento`) REFERENCES `forma_pagamento` (`id`),
   CONSTRAINT `pedido_ibfk_5` FOREIGN KEY (`id_endereco`) REFERENCES `endereco` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela projetoif.pedido: ~10 rows (aproximadamente)
+-- Copiando dados para a tabela projetoif.pedido: ~11 rows (aproximadamente)
 INSERT INTO `pedido` (`id`, `data`, `id_restaurante`, `valor`, `taxa_entrega`, `id_promocao`, `id_status_entrega`, `id_forma_pagamento`, `observacao`, `troco`, `id_endereco`) VALUES
 	(51, '2024-11-01 12:30:00', 1, 89.80, 5.00, 1, 1, 1, 'Sem cebola na pizza', 0.00, 1),
 	(52, '2024-11-02 13:45:00', 2, 29.90, 4.50, 2, 2, 2, 'Entrega rápida, por favor', 10.00, 2),
@@ -219,7 +222,8 @@ INSERT INTO `pedido` (`id`, `data`, `id_restaurante`, `valor`, `taxa_entrega`, `
 	(57, '2024-11-07 14:00:00', 6, 50.40, 4.00, 3, 1, 1, 'Pedido para presente', 0.00, 6),
 	(58, '2024-11-08 15:20:00', 7, 32.90, 5.50, NULL, 2, 2, 'Deixar na portaria', 0.00, 7),
 	(59, '2024-11-09 17:45:00', 8, 120.00, 6.00, 6, 1, 1, 'Com pressa, entrega antes das 18h', 0.00, 8),
-	(60, '2024-11-10 19:00:00', 9, 75.90, 7.00, 7, 3, 3, 'Pedido recorrente, mesmo endereço', 0.00, 9);
+	(60, '2024-11-10 19:00:00', 9, 75.90, 7.00, 7, 3, 3, 'Pedido recorrente, mesmo endereço', 0.00, 9),
+	(61, '2024-12-04 09:13:26', 7, 32.00, 5.00, NULL, 1, 3, NULL, NULL, 26);
 
 -- Copiando estrutura para tabela projetoif.pedido_produto
 CREATE TABLE IF NOT EXISTS `pedido_produto` (
@@ -263,7 +267,7 @@ CREATE TABLE IF NOT EXISTS `produto` (
   CONSTRAINT `produto_ibfk_2` FOREIGN KEY (`restaurante_id`) REFERENCES `restaurante` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela projetoif.produto: ~20 rows (aproximadamente)
+-- Copiando dados para a tabela projetoif.produto: ~19 rows (aproximadamente)
 INSERT INTO `produto` (`id`, `nome`, `descricao`, `preco`, `categoria_id`, `restaurante_id`) VALUES
 	(1, 'Pizza Margherita', 'Queijo, tomate e manjericão', 39.900001525878906, 1, 1),
 	(2, 'Pizza Calabresa', 'Calabresa, cebola e queijo', 42.900001525878906, 1, 10),
